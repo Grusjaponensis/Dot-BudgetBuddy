@@ -6,15 +6,24 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct Dot_BudgetBuddyApp: App {
-    let persistenceController = PersistenceController.shared
-
+    let modelContainner: ModelContainer
+    
+    init() {
+        do {
+            modelContainner = try ModelContainer(for: Payment.self)
+        } catch {
+            fatalError("Could not initialize ModelContainer")
+        }
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            MainView()
         }
+        .modelContainer(modelContainner)
     }
 }

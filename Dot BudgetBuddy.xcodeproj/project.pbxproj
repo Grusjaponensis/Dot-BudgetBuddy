@@ -7,22 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8016B78A2B1721D6005660D4 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8016B7892B1721D6005660D4 /* Payment.swift */; };
+		801A1D8C2B15F26600D8473C /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801A1D8B2B15F26600D8473C /* TestView.swift */; };
 		802A012B2AEA66870052F04C /* Dot_BudgetBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802A012A2AEA66870052F04C /* Dot_BudgetBuddyApp.swift */; };
-		802A012D2AEA66870052F04C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802A012C2AEA66870052F04C /* ContentView.swift */; };
+		802A012D2AEA66870052F04C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802A012C2AEA66870052F04C /* MainView.swift */; };
 		802A012F2AEA66880052F04C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 802A012E2AEA66880052F04C /* Assets.xcassets */; };
 		802A01322AEA66880052F04C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 802A01312AEA66880052F04C /* Preview Assets.xcassets */; };
-		802A01342AEA66880052F04C /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802A01332AEA66880052F04C /* Persistence.swift */; };
-		802A01372AEA66880052F04C /* Dot_BudgetBuddy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 802A01352AEA66880052F04C /* Dot_BudgetBuddy.xcdatamodeld */; };
+		80481B8F2B15FD6B0040CA49 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80481B8E2B15FD6B0040CA49 /* AddView.swift */; };
+		805D120A2B134FE200312F7A /* DetailedPaymentSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805D12092B134FE200312F7A /* DetailedPaymentSheetView.swift */; };
+		806825642AEA82170041B49C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 806825632AEA82170041B49C /* Launch Screen.storyboard */; };
+		807F8B922B1EEC5400FDB609 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807F8B912B1EEC5400FDB609 /* SettingsView.swift */; };
+		807F8B942B1EF8B000FDB609 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807F8B932B1EF8B000FDB609 /* MainTabView.swift */; };
+		80EC87BD2B1119F200390E7A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EC87BC2B1119F200390E7A /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8016B7892B1721D6005660D4 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
+		801A1D8B2B15F26600D8473C /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		802A01272AEA66870052F04C /* Dot BudgetBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dot BudgetBuddy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		802A012A2AEA66870052F04C /* Dot_BudgetBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dot_BudgetBuddyApp.swift; sourceTree = "<group>"; };
-		802A012C2AEA66870052F04C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		802A012C2AEA66870052F04C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		802A012E2AEA66880052F04C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		802A01312AEA66880052F04C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		802A01332AEA66880052F04C /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		802A01362AEA66880052F04C /* Dot_BudgetBuddy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Dot_BudgetBuddy.xcdatamodel; sourceTree = "<group>"; };
+		80481B8E2B15FD6B0040CA49 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
+		805D12092B134FE200312F7A /* DetailedPaymentSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPaymentSheetView.swift; sourceTree = "<group>"; };
+		806825632AEA82170041B49C /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		807F8B912B1EEC5400FDB609 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		807F8B932B1EF8B000FDB609 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		80EC87BC2B1119F200390E7A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +48,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8016B7882B17216A005660D4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				802A012C2AEA66870052F04C /* MainView.swift */,
+				807F8B932B1EF8B000FDB609 /* MainTabView.swift */,
+				80481B8E2B15FD6B0040CA49 /* AddView.swift */,
+				80EC87BC2B1119F200390E7A /* HomeView.swift */,
+				807F8B912B1EEC5400FDB609 /* SettingsView.swift */,
+				805D12092B134FE200312F7A /* DetailedPaymentSheetView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		802A011E2AEA66870052F04C = {
 			isa = PBXGroup;
 			children = (
@@ -55,11 +80,12 @@
 		802A01292AEA66870052F04C /* Dot BudgetBuddy */ = {
 			isa = PBXGroup;
 			children = (
+				8016B7882B17216A005660D4 /* Views */,
 				802A012A2AEA66870052F04C /* Dot_BudgetBuddyApp.swift */,
-				802A012C2AEA66870052F04C /* ContentView.swift */,
+				8016B7892B1721D6005660D4 /* Payment.swift */,
+				801A1D8B2B15F26600D8473C /* TestView.swift */,
+				806825632AEA82170041B49C /* Launch Screen.storyboard */,
 				802A012E2AEA66880052F04C /* Assets.xcassets */,
-				802A01332AEA66880052F04C /* Persistence.swift */,
-				802A01352AEA66880052F04C /* Dot_BudgetBuddy.xcdatamodeld */,
 				802A01302AEA66880052F04C /* Preview Content */,
 			);
 			path = "Dot BudgetBuddy";
@@ -131,6 +157,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				806825642AEA82170041B49C /* Launch Screen.storyboard in Resources */,
 				802A01322AEA66880052F04C /* Preview Assets.xcassets in Resources */,
 				802A012F2AEA66880052F04C /* Assets.xcassets in Resources */,
 			);
@@ -143,10 +170,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				802A01342AEA66880052F04C /* Persistence.swift in Sources */,
-				802A01372AEA66880052F04C /* Dot_BudgetBuddy.xcdatamodeld in Sources */,
-				802A012D2AEA66870052F04C /* ContentView.swift in Sources */,
+				801A1D8C2B15F26600D8473C /* TestView.swift in Sources */,
+				807F8B922B1EEC5400FDB609 /* SettingsView.swift in Sources */,
+				807F8B942B1EF8B000FDB609 /* MainTabView.swift in Sources */,
+				802A012D2AEA66870052F04C /* MainView.swift in Sources */,
+				8016B78A2B1721D6005660D4 /* Payment.swift in Sources */,
+				805D120A2B134FE200312F7A /* DetailedPaymentSheetView.swift in Sources */,
 				802A012B2AEA66870052F04C /* Dot_BudgetBuddyApp.swift in Sources */,
+				80481B8F2B15FD6B0040CA49 /* AddView.swift in Sources */,
+				80EC87BD2B1119F200390E7A /* HomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,9 +315,11 @@
 				DEVELOPMENT_TEAM = C9XWCAX2DB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -312,9 +346,11 @@
 				DEVELOPMENT_TEAM = C9XWCAX2DB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -352,19 +388,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		802A01352AEA66880052F04C /* Dot_BudgetBuddy.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				802A01362AEA66880052F04C /* Dot_BudgetBuddy.xcdatamodel */,
-			);
-			currentVersion = 802A01362AEA66880052F04C /* Dot_BudgetBuddy.xcdatamodel */;
-			path = Dot_BudgetBuddy.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 802A011F2AEA66870052F04C /* Project object */;
 }
