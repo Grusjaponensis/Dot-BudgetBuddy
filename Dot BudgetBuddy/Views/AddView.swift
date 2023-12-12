@@ -11,39 +11,47 @@ import SwiftUI
 struct AddView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.modelContext) var modelContext
-    @Query private var payment: [Payment]
+    
+    @State private var selectedTransactionType: TransactionType = .expense
     @State private var selectedCategoryIndex: Int?
     @State private var selectedDate = Date()
     @State private var inputExpenceWithAnimation = ""
     @State private var inputExpence = ""
     @State private var inputNotes = ""
     @State private var isInputValid = false
-    @Binding var isPresent: Bool
-    private static var categoryImages = ["takeoutbag.and.cup.and.straw", "car", "gamecontroller", "handbag.fill", "calendar", "figure.run"]
+    
     private static var correspondingColor: [Color] = [.cyan, .pink, .blue, .orange, .purple, .green]
+    
+    @Binding var isPresent: Bool
+    
     
     var body: some View {
         VStack {
             title
             addCategory
-            addExpense
+            if selectedTransactionType == .expense {
+                expenceCategory
+            } else {
+                incomeCategory
+            }
+            addTransactionAmount
             addButton
-            Spacer()
         }
     }
     
     // MARK: - title
+
     var title: some View {
         Text("Record Something?")
             .font(.system(size: 40, design: .rounded))
             .fontWeight(.bold)
             .foregroundStyle(colorScheme == .dark ? .orange : .primary)
             .frame(maxWidth: 350, alignment: .leading)
-            .padding(.horizontal)
             .padding(.top, 20)
     }
     
     // MARK: - add
+
     var addCategory: some View {
         VStack {
             Text("Category".uppercased())
@@ -51,58 +59,39 @@ struct AddView: View {
                 .bold()
                 .opacity(0.5)
                 .padding(.vertical, 4)
-                .padding(.bottom, 10)
                 .frame(maxWidth: 350, alignment: .leading)
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))], spacing: 40) {
-                ForEach(AddView.categoryImages.indices, id: \.self) { index in
-                    let image = AddView.categoryImages[index]
-                    let color = AddView.correspondingColor[index]
-                    Button(action: { selectedCategoryIndex = index }, label: {
-                        VStack {
-                            ZStack {
-                                if selectedCategoryIndex == index {
-                                    Circle()
-                                        .frame(maxWidth: 90, maxHeight: 90)
-                                        .foregroundStyle(color)
-                                        .opacity(0.8)
-                                }
-                                Circle()
-                                    .stroke(lineWidth: 4)
-                                    .frame(maxWidth: 90, maxHeight: 90)
-                                    .foregroundStyle(color)
-                                    .shadow(radius: selectedCategoryIndex == index ? 10 : 1)
-                                Image(systemName: image)
-                                    .font(.system(size: 40))
-                                    .foregroundStyle(selectedCategoryIndex == index ? .white : color)
-                                    .shadow(radius: 1)
-                            }
-                            .frame(maxWidth: 130)
-                            Text(PaymentCategory.allCases[index].rawValue)
-                                .font(.system(size: 15, design: .rounded))
-                                .foregroundStyle(colorScheme == .dark ? .white : .primary)
-                                .bold()
-                        }
-                    })
-                }
+            Picker("Type", selection: $selectedTransactionType) {
+                Text("Expence")
+                    .tag(TransactionType.expense)
+                Text("Income")
+                    .tag(TransactionType.income)
             }
-            .frame(maxWidth: 340, alignment: .center)
-            .background(
-                RoundedRectangle(cornerRadius: 25.0, style: .continuous)
-                    .foregroundStyle(.ultraThinMaterial.opacity(0.7))
-                    .frame(width: 360, height: 295)
-            )
-
+            .pickerStyle(.segmented)
+            .frame(maxWidth: 350)
+            .padding(.bottom)
         }
     }
+    
+    // MARK: - expense
+
+    var expenceCategory: some View {
+        addTransactionCategory(transactionImage: expenceImages, colors: AddView.correspondingColor, transactionType: .expense)
+    }
+    
+    // MARK: - income
+
+    var incomeCategory: some View {
+        addTransactionCategory(transactionImage: incomeImages, colors: AddView.correspondingColor, transactionType: .income)
+    }
         
-    var addExpense: some View {
+    var addTransactionAmount: some View {
         VStack {
-            Text("Expence".uppercased())
+            Text(selectedTransactionType == .expense ? "Expence".uppercased() : "Income".uppercased())
                 .font(.system(.title3, design: .rounded))
                 .bold()
                 .opacity(0.5)
                 .frame(maxWidth: 350, alignment: .leading)
-                .padding(.top, 35)
+                .padding(.top, 20)
             VStack {
                 TextField(text: $inputExpenceWithAnimation) {
                     Text("¥0.00")
@@ -129,7 +118,7 @@ struct AddView: View {
                     .frame(maxWidth: 335)
                 }
             }
-            .padding(.vertical, 15)
+            .padding(.vertical, 10)
             .padding(.horizontal, 4)
             .frame(maxWidth: 350, alignment: .center)
             .background(
@@ -139,7 +128,7 @@ struct AddView: View {
             )
         }
     }
-    
+        
     var addButton: some View {
         Button(action: {
             recordPaymentToModel()
@@ -154,21 +143,72 @@ struct AddView: View {
         .background(
             Capsule()
                 .frame(width: 350, height: 50)
-                .foregroundStyle(inputExpence.isEmpty ? .gray.opacity(0.6) : .orange)
+                .foregroundStyle(inputExpence.isEmpty || selectedCategoryIndex == nil ? .gray.opacity(0.6) : .orange)
         )
         .padding(.top, 40)
-        .disabled(inputExpence.isEmpty)
+        .disabled(inputExpence.isEmpty || selectedCategoryIndex == nil)
+    }
+    
+    func addTransactionCategory(transactionImage: [String], colors: [Color], transactionType: TransactionType) -> some View {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))], spacing: 40) {
+            ForEach(colors.indices, id: \.self) { index in
+                let image = transactionImage[index]
+                let color = colors[index]
+                Button(action: { selectedCategoryIndex = index }, label: {
+                    VStack {
+                        ZStack {
+                            if selectedCategoryIndex == index {
+                                Circle()
+                                    .frame(maxWidth: 80, maxHeight: 80)
+                                    .foregroundStyle(color)
+                                    .opacity(0.8)
+                            }
+                            Circle()
+                                .stroke(lineWidth: 4)
+                                .frame(maxWidth: 80, maxHeight: 80)
+                                .foregroundStyle(color)
+                                .shadow(radius: selectedCategoryIndex == index ? 10 : 1)
+                            Image(systemName: image)
+                                .font(.system(size: 35))
+                                .foregroundStyle(selectedCategoryIndex == index ? .white : color)
+                                .shadow(radius: 1)
+                        }
+                        .frame(maxWidth: 130)
+                        switch transactionType {
+                            case.expense:
+                            Text(PaymentCategory.allCases[index].rawValue)
+                                .font(.system(size: 15, design: .rounded))
+                                .foregroundStyle(colorScheme == .dark ? .white : .primary)
+                                .bold()
+                        case .income:
+                            Text(IncomeCategory.allCases[index].rawValue)
+                                .font(.system(size: 15, design: .rounded))
+                                .foregroundStyle(colorScheme == .dark ? .white : .primary)
+                                .bold()
+                        }
+                    }
+                })
+            }
+        }
+        .frame(maxWidth: 340, alignment: .center)
+        .background(
+            RoundedRectangle(cornerRadius: 25.0, style: .continuous)
+                .foregroundStyle(.ultraThinMaterial.opacity(0.7))
+                .frame(width: 360, height: 268)
+        )
     }
         
     func recordPaymentToModel() {
         if let categoryIndex = selectedCategoryIndex, !inputExpence.isEmpty {
             let newPayment = Payment(
-                category: PaymentCategory.allCases[categoryIndex].rawValue,
+                transactionType: selectedTransactionType,
+                category: selectedTransactionType == .expense ? PaymentCategory.allCases[categoryIndex].rawValue : IncomeCategory.allCases[categoryIndex].rawValue,
                 date: selectedDate,
                 expense: Double(inputExpence) ?? 0.0,
                 description: inputNotes
             )
             modelContext.insert(newPayment)
+            print(selectedCategoryIndex ?? -1)
         }
     }
 }

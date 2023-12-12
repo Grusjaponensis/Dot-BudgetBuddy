@@ -5,19 +5,23 @@
 //  Created by snow on 11/25/23.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct HomeView: View {
-    @Query private var payments: [Payment]
+    @Query(sort: \Payment.date, order: .reverse) private var payments: [Payment]
+
     @State private var currentTimePeriod = getTimeOfDay()
     @State private var isDetailSheetPresented = false
+    @State private var userName = UserDefaults.standard.string(forKey: "userName") ?? "Ethan"
+    @State private var inputText = ""
+    @State private var isDeletionAlertPresented = false
+
     @Binding var isTabBarPresented: Bool
-    @Environment(\.userName) private var userName
+
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.modelContext) private var modelContext
-    var temp = ["Category1", "Category2", "Category3"]
-    
+
     var body: some View {
         NavigationStack {
             greeting
@@ -64,7 +68,7 @@ struct HomeView: View {
         .frame(maxWidth: 350)
     }
 
-    // MARK: - payment detail
+    // MARK: - payment detail button
 
     var detailedReviewButton: some View {
         HStack {
@@ -136,29 +140,22 @@ struct HomeView: View {
         .padding(.all, 13)
         .frame(width: 175, height: 150)
         .background(.ultraThinMaterial, in:
-            RoundedRectangle(cornerRadius: 25, style: .continuous)
-        )
+            RoundedRectangle(cornerRadius: 25, style: .continuous))
     }
-    
+
+    // MARK: - payment list
+
+    // FIXME: - Nested ForEach
     var filteredPaymentList: some View {
         VStack {
             List {
-                Section {
-                    ForEach(payments, id: \.self) { payment in
-                        HStack {
-                            Text(payment.category)
-                                .font(.system(size: 20, design: .rounded))
-                                .bold()
-                            Spacer()
-                            VStack {
-                                Text(String(format: "%.2f", payment.expense))
-                                Text(payment.date.formatted(date: .numeric, time: .omitted))
-                                    .font(.subheadline)
-                                    .opacity(0.5)
-                            }
+                ForEach(sortedSections(), id: \.self) { section in
+                    Section(header: Text(section.formattedDate).font(.subheadline).bold()) {
+                        ForEach(transactionsForDate(section), id: \.self) { payment in
+                            TransactionListView(payment: payment)
                         }
+                        .onDelete { $0.forEach { modelContext.delete(payments[$0]) } }
                     }
-                    .onDelete{ $0.forEach { modelContext.delete(payments[$0]) } }
                 }
             }
             .scrollContentBackground(.hidden)
@@ -167,6 +164,26 @@ struct HomeView: View {
                     .frame(maxWidth: 370)
                     .foregroundStyle(.regularMaterial)
             )
+        }
+    }
+
+    func sortedSections() -> [Date] {
+        let dateDictionary = payments.reduce(into: [String: Date]()) { result, payment in
+            let components = Calendar.current.dateComponents([.year, .month, .day], from: payment.date)
+            if let truncatedDate = Calendar.current.date(from: components) {
+                let key = DateFormatter.localizedString(from: truncatedDate, dateStyle: .medium, timeStyle: .none)
+                result[key] = truncatedDate
+            }
+        }
+        let sortedDates = dateDictionary.values.sorted(by: >)
+        return sortedDates
+    }
+
+    func transactionsForDate(_ date: Date) -> [Payment] {
+        let truncatedDate = Calendar.current.dateComponents([.year, .month, .day], from: date)
+        return payments.filter { transaction in
+            let transactionComponents = Calendar.current.dateComponents([.year, .month, .day], from: transaction.date)
+            return truncatedDate.day == transactionComponents.day && truncatedDate.month == transactionComponents.month && truncatedDate.year == transactionComponents.year
         }
     }
 }
@@ -198,14 +215,11 @@ private func getTimeOfDay() -> TimeOfDay {
     }
 }
 
-struct UserNamePath: EnvironmentKey {
-    static var defaultValue: String = "Ethan"
-}
-
-extension EnvironmentValues {
-    var userName: String {
-        get { self[UserNamePath.self] }
-        set { self[UserNamePath.self] = newValue }
+extension Date {
+    var formattedDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd EEEE"
+        return dateFormatter.string(from: self)
     }
 }
 

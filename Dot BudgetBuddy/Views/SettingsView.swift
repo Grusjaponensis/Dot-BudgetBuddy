@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @Environment(\.userName) var userName
+    @State private var userName = UserDefaults.standard.string(forKey: "userName") ?? "Ethan"
 
     var body: some View {
         NavigationStack {

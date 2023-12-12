@@ -179,28 +179,6 @@ struct DetailedPaymentView: View {
     }
 }
 
-/// categories: Food & Drink, Transpotation, Entertainment, Shopping, Subscriptions, Sports
-func calculateAverageSpent(_ totalCost: Double) -> Double {
-    let calender = Calendar.current
-    return totalCost == 0 ? 0.0 : (totalCost / Double(calender.component(.month, from: Date())))
-}
-
-func formatNumber(_ number: Double) -> String {
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .decimal
-    formatter.minimumFractionDigits = 2
-    formatter.maximumFractionDigits = 2
-    return formatter.string(from: NSNumber(value: number)) ?? "0.00"
-}
-
-func transformDate(_ year: Int = Calendar.current.component(.year, from: Date()),
-                   _ month: Int = Calendar.current.component(.month, from: Date()),
-                   _ day: Int = Calendar.current.component(.day, from: Date())) -> Date {
-    // FIXME: cannot handle invalid date, add try-catch block
-    let date = DateComponents(year: year, month: month, day: day)
-    return Calendar.current.date(from: date) ?? Date()
-}
-
 //#Preview {
 //    do {
 //        let config = ModelConfiguration(isStoredInMemoryOnly: true)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		800371C82B28B1250010AB50 /* TransactionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800371C72B28B1250010AB50 /* TransactionListView.swift */; };
 		8016B78A2B1721D6005660D4 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8016B7892B1721D6005660D4 /* Payment.swift */; };
 		801A1D8C2B15F26600D8473C /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801A1D8B2B15F26600D8473C /* TestView.swift */; };
 		802A012B2AEA66870052F04C /* Dot_BudgetBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802A012A2AEA66870052F04C /* Dot_BudgetBuddyApp.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		800371C72B28B1250010AB50 /* TransactionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListView.swift; sourceTree = SOURCE_ROOT; };
 		8016B7892B1721D6005660D4 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		801A1D8B2B15F26600D8473C /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		802A01272AEA66870052F04C /* Dot BudgetBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dot BudgetBuddy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +53,7 @@
 		8016B7882B17216A005660D4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				800371C72B28B1250010AB50 /* TransactionListView.swift */,
 				802A012C2AEA66870052F04C /* MainView.swift */,
 				807F8B932B1EF8B000FDB609 /* MainTabView.swift */,
 				80481B8E2B15FD6B0040CA49 /* AddView.swift */,
@@ -177,6 +180,7 @@
 				8016B78A2B1721D6005660D4 /* Payment.swift in Sources */,
 				805D120A2B134FE200312F7A /* DetailedPaymentSheetView.swift in Sources */,
 				802A012B2AEA66870052F04C /* Dot_BudgetBuddyApp.swift in Sources */,
+				800371C82B28B1250010AB50 /* TransactionListView.swift in Sources */,
 				80481B8F2B15FD6B0040CA49 /* AddView.swift in Sources */,
 				80EC87BD2B1119F200390E7A /* HomeView.swift in Sources */,
 			);
@@ -322,6 +326,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -353,6 +358,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
