@@ -11,13 +11,12 @@ import SwiftUI
 struct HomeView: View {
     @Query(sort: \Payment.date, order: .reverse) private var payments: [Payment]
 
+    @ObservedObject var userData: UserData
+
     @State private var currentTimePeriod = getTimeOfDay()
     @State private var isDetailSheetPresented = false
-    @State private var userName = UserDefaults.standard.string(forKey: "userName") ?? "Ethan"
     @State private var inputText = ""
     @State private var isDeletionAlertPresented = false
-
-    @Binding var isTabBarPresented: Bool
 
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.modelContext) private var modelContext
@@ -31,7 +30,10 @@ struct HomeView: View {
                     isDetailSheetPresented.toggle()
                 }
                 .sheet(isPresented: $isDetailSheetPresented) {
-                    DetailedPaymentView(isPresented: $isDetailSheetPresented)
+                    DetailedPaymentView(userData: userData, isPresented: $isDetailSheetPresented,
+                                        monthlyExpense: getMonthlyExpense(),
+                                        yearlyExpense: getYearlyExpense(),
+                                        monthlyEarning: getMonthlyEarnings())
                 }
             HStack {
                 dashBoardOfToday
@@ -51,13 +53,13 @@ struct HomeView: View {
                     .font(.system(size: 40, design: .rounded))
                     .fontWeight(.bold)
                     .frame(maxWidth: 350, alignment: .leading)
-                Text("\(userName)")
+                Text(userData.userName)
                     .font(.system(size: 35, design: .rounded))
                     .fontWeight(.bold)
                     .frame(maxWidth: 350, alignment: .leading)
             }
             .foregroundStyle(colorScheme == .dark ? .orange : .primary)
-            NavigationLink(destination: SettingsView()) {
+            NavigationLink(destination: SettingsView(userData: userData)) {
                 Image(systemName: "person.crop.circle")
                     .font(.system(size: 50))
                     .foregroundStyle(.linearGradient(colors: [.orange, .red], startPoint: .leading, endPoint: .trailing))
@@ -89,52 +91,60 @@ struct HomeView: View {
 
     var dashBoardOfToday: some View {
         VStack {
-            Text("Today")
-                .font(.system(size: 30))
+            Text("Today's Expense")
+                .font(.system(size: 20, design: .rounded))
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
             Spacer()
+            Text("total")
+                .font(.system(size: 15))
+                .fontWeight(.bold)
+                .opacity(0.5)
+                .frame(maxWidth: .infinity, alignment: .leading)
             Divider()
             HStack {
-                Text("¥34.0")
-                    .font(.system(size: 25, design: .rounded))
+                Text("¥\(formatNumber(getTodayExpence()))")
+                    .font(.system(size: 22, design: .rounded))
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Spacer()
-                Text("total")
-                    .font(.system(size: 20))
-                    .fontWeight(.bold)
-                    .opacity(0.5)
-                    .frame(alignment: .trailing)
             }
         }
         .padding(.all, 13)
         .frame(width: 175, height: 150)
         .background(.ultraThinMaterial, in:
             RoundedRectangle(cornerRadius: 25, style: .continuous))
-//        .shadow(radius: 50, y: -3)
     }
 
     // MARK: - this month's payment
 
     var dashBoardOdMonth: some View {
         VStack {
-            Text("This Month")
-                .font(.system(size: 30))
+            Text("Monthly Budget")
+                .font(.system(size: 20))
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
             Spacer()
-            Divider()
-            HStack {
-                Text("¥1984.5")
-                    .font(.system(size: 25, design: .rounded))
+            if getMonthlyExpense() > userData.userBudget {
+                Text("over")
+                    .font(.system(size: 15))
+                    .foregroundStyle(.red)
                     .fontWeight(.bold)
+                    .opacity(0.9)
                     .frame(maxWidth: .infinity, alignment: .leading)
+            } else {
                 Text("left")
-                    .font(.system(size: 20))
+                    .font(.system(size: 15))
                     .fontWeight(.bold)
                     .opacity(0.5)
-                    .frame(alignment: .trailing)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            Divider()
+            HStack {
+                Text("¥\(formatNumber(userData.userBudget - getMonthlyExpense()))")
+                    .font(.system(size: 22, design: .rounded))
+                    .fontWeight(.bold)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
         .padding(.all, 13)
@@ -145,7 +155,6 @@ struct HomeView: View {
 
     // MARK: - payment list
 
-    // FIXME: - Nested ForEach
     var filteredPaymentList: some View {
         VStack {
             List {
@@ -167,7 +176,7 @@ struct HomeView: View {
         }
     }
 
-    func sortedSections() -> [Date] {
+    private func sortedSections() -> [Date] {
         let dateDictionary = payments.reduce(into: [String: Date]()) { result, payment in
             let components = Calendar.current.dateComponents([.year, .month, .day], from: payment.date)
             if let truncatedDate = Calendar.current.date(from: components) {
@@ -179,12 +188,64 @@ struct HomeView: View {
         return sortedDates
     }
 
-    func transactionsForDate(_ date: Date) -> [Payment] {
+    private func transactionsForDate(_ date: Date) -> [Payment] {
         let truncatedDate = Calendar.current.dateComponents([.year, .month, .day], from: date)
         return payments.filter { transaction in
             let transactionComponents = Calendar.current.dateComponents([.year, .month, .day], from: transaction.date)
             return truncatedDate.day == transactionComponents.day && truncatedDate.month == transactionComponents.month && truncatedDate.year == transactionComponents.year
         }
+    }
+
+    private func getTodayExpence() -> Double {
+        let today = Calendar.current.dateComponents([.year, .month, .day], from: Date.now)
+        return payments.reduce(0.0) { sum, transaction in
+            let transactionDate = Calendar.current.dateComponents([.year, .month, .day], from: transaction.date)
+            let condition = transactionDate == today && transaction.transactionType == .expense
+            return sum + (condition ? transaction.expense : 0.0)
+        }
+    }
+
+    private func getMonthlyExpense() -> Double {
+        let thisMonth = Calendar.current.dateComponents([.year, .month], from: Date.now)
+        let monthlyExpense = payments.reduce(0.0) { sum, transaction in
+            let transactionDate = Calendar.current.dateComponents([.year, .month], from: transaction.date)
+            if transactionDate == thisMonth {
+                let expenseAmount = (transaction.transactionType == .expense) ? transaction.expense : 0.0
+                return sum + expenseAmount
+            } else {
+                return sum
+            }
+        }
+        return monthlyExpense
+    }
+    
+    private func getMonthlyEarnings() -> Double {
+        let thisMonth = Calendar.current.dateComponents([.year, .month], from: Date.now)
+        let monthlyEarnings = payments.reduce(0.0) { sum, transaction in
+            let transactionDate = Calendar.current.dateComponents([.year, .month], from: transaction.date)
+            if transactionDate == thisMonth {
+                let earning = (transaction.transactionType == .income) ? transaction.expense : 0.0
+                return sum + earning
+            } else {
+                return sum
+            }
+        }
+        return monthlyEarnings
+    }
+    
+    private func getYearlyExpense() -> Double {
+        let thisYear = Calendar.current.dateComponents([.year], from: Date.now)
+        let yearlyExpense = payments.reduce(0.0) { sum, transaction in
+            let transactionDate = Calendar.current.dateComponents([.year], from: transaction.date)
+            if transactionDate == thisYear {
+                let expenseAmount = (transaction.transactionType == .expense) ? transaction.expense : 0
+                return sum + expenseAmount
+            } else {
+                return sum
+            }
+        }
+        return yearlyExpense
+
     }
 }
 
@@ -224,5 +285,5 @@ extension Date {
 }
 
 #Preview {
-    HomeView(isTabBarPresented: .constant(false))
+    HomeView(userData: UserData())
 }

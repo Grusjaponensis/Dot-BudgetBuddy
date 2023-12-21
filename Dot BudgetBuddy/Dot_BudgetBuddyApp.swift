@@ -10,6 +10,7 @@ import SwiftData
 
 @main
 struct Dot_BudgetBuddyApp: App {
+    @StateObject private var userData = UserData()
     let modelContainner: ModelContainer
     
     init() {
@@ -22,7 +23,7 @@ struct Dot_BudgetBuddyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainView()
+            MainView(userData: userData)
         }
         .modelContainer(modelContainner)
     }

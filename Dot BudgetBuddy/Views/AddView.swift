@@ -20,6 +20,8 @@ struct AddView: View {
     @State private var inputNotes = ""
     @State private var isInputValid = false
     
+    private static var expenceImages = ["takeoutbag.and.cup.and.straw", "car", "gamecontroller", "handbag", "calendar", "figure.run"]
+    private static var incomeImages = ["dollarsign", "graduationcap", "medal", "wallet.pass", "creditcard", "gift"]
     private static var correspondingColor: [Color] = [.cyan, .pink, .blue, .orange, .purple, .green]
     
     @Binding var isPresent: Bool
@@ -75,13 +77,13 @@ struct AddView: View {
     // MARK: - expense
 
     var expenceCategory: some View {
-        addTransactionCategory(transactionImage: expenceImages, colors: AddView.correspondingColor, transactionType: .expense)
+        addTransactionCategory(transactionImage: AddView.expenceImages, colors: AddView.correspondingColor, transactionType: .expense)
     }
     
     // MARK: - income
 
     var incomeCategory: some View {
-        addTransactionCategory(transactionImage: incomeImages, colors: AddView.correspondingColor, transactionType: .income)
+        addTransactionCategory(transactionImage: AddView.incomeImages, colors: AddView.correspondingColor, transactionType: .income)
     }
         
     var addTransactionAmount: some View {
@@ -216,8 +218,8 @@ struct AddView: View {
 #Preview {
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Payment.self, configurations: config)
-        let example = Payment(category: PaymentCategory.entertainment.rawValue, expense: 648, description: "For W")
+        // let container = try ModelContainer(for: Payment.self, configurations: config)
+        // let example = Payment(category: PaymentCategory.entertainment.rawValue, expense: 648, description: "For W")
         return AddView(isPresent: .constant(false))
     } catch {
         fatalError("Fatal Error!")

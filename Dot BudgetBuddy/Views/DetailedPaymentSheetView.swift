@@ -7,16 +7,21 @@
 
 import SwiftUI
 import SwiftData
+import Charts
 
 struct DetailedPaymentView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.modelContext) var context
-    @Query var payments: [Payment]
+    
+    @ObservedObject var userData: UserData
+    
+    @Query(sort: \Payment.date, order: .reverse) var payments: [Payment]
+    
     @Binding var isPresented: Bool
-    @State var isBudgetExceed = false
-    @State var budgetLeftPercentage = 0.806
-    @State var totalCostThisYear = 0.0
-
+    var monthlyExpense: Double
+    var yearlyExpense: Double
+    var monthlyEarning: Double
+    
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
@@ -33,9 +38,6 @@ struct DetailedPaymentView: View {
                     Text("Done").foregroundStyle(.orange)
                 }
             )
-            .navigationBarItems(trailing: Button(action: {addSampleData(modelContext: context)}) {
-                Text("Add Sample").foregroundStyle(.orange)
-            })
         }
     }
 
@@ -52,23 +54,28 @@ struct DetailedPaymentView: View {
 
     var totalSpent: some View {
         VStack(spacing: 20) {
-            Text("¥475.64")
+            Text("¥\(formatNumber(monthlyExpense))")
                 .font(.system(.largeTitle, design: .rounded))
                 .fontWeight(.bold)
                 .foregroundStyle(colorScheme == .dark ? .orange : .primary)
             HStack {
-                Text("¥1984.50")
-                    .font(.system(.body, design: .rounded))
-                    .bold()
-                    .opacity(0.5)
-                    .frame(alignment: .trailing)
-                if isBudgetExceed == true {
+                if monthlyExpense > userData.userBudget + monthlyEarning {
+                    Text("¥\(formatNumber(monthlyExpense - monthlyEarning))")
+                        .font(.system(.body, design: .rounded))
+                        .bold()
+                        .opacity(0.5)
+                        .frame(alignment: .trailing)
                     Text("over")
                         .font(.system(.body, design: .rounded))
                         .foregroundStyle(.red)
                         .bold()
                         .frame(alignment: .leading)
                 } else {
+                    Text("¥\(formatNumber(monthlyEarning - monthlyExpense))")
+                        .font(.system(.body, design: .rounded))
+                        .bold()
+                        .opacity(0.5)
+                        .frame(alignment: .trailing)
                     Text("left")
                         .font(.system(.body, design: .rounded))
                         .opacity(0.5)
@@ -79,7 +86,7 @@ struct DetailedPaymentView: View {
                 Circle()
                     .stroke(.secondary.opacity(0.3), lineWidth: 20)
                 Circle()
-                    .trim(from: 0.0, to: budgetLeftPercentage)
+                    .trim(from: 0.0, to: getBudgetLeftPercentage())
                     .stroke(
                         AngularGradient(
                             gradient: Gradient(colors: [.red, .orange, .red]),
@@ -88,9 +95,9 @@ struct DetailedPaymentView: View {
                         ),
                         style: .init(lineWidth: 20, lineCap: .round, lineJoin: .round)
                     )
-                    .animation(.easeInOut(duration: 1), value: budgetLeftPercentage)
+                    .animation(.easeInOut(duration: 1), value: getBudgetLeftPercentage())
                 Text(
-                    Double(String(format: "%.2f", budgetLeftPercentage))!
+                    Double(String(format: "%.2f", getBudgetLeftPercentage()))!
                         .formatted(.percent)
                 )
                 .font(.system(.title, design: .rounded))
@@ -150,42 +157,48 @@ struct DetailedPaymentView: View {
     // MARK: - detailed payment
     
     var detailPayment: some View {
-        ScrollView {
-            ForEach(payments, id: \.self) { payment in
-                HStack {
-                    Text(payment.category)
-                        .bold()
-                        .font(.system(.headline, design: .rounded))
-                    Spacer()
-                    VStack {
-                        Text(String(format: "%.2f", payment.expense))
-                            .font(.system(.subheadline, design: .rounded))
-                        Text(payment.date.formatted(date: .numeric, time: .omitted))
-                            .font(.system(.footnote, design: .rounded))
-                            .opacity(0.5)
-                    }
-                }
-                Divider()
-            }
-            .padding(.all, 15)
-            .padding(.horizontal, 8)
-        }
+//        ScrollView {
+//            ForEach(payments, id: \.self) { payment in
+//                HStack {
+//                    Text(payment.category)
+//                        .bold()
+//                        .font(.system(.headline, design: .rounded))
+//                    Spacer()
+//                    VStack {
+//                        Text(String(format: "%.2f", payment.expense))
+//                            .font(.system(.subheadline, design: .rounded))
+//                        Text(payment.date.formatted(date: .numeric, time: .omitted))
+//                            .font(.system(.footnote, design: .rounded))
+//                            .opacity(0.5)
+//                    }
+//                }
+//                Divider()
+//            }
+//            .padding(.all, 15)
+//            .padding(.horizontal, 8)
+//        }
+        TransactionPieChartView()
     }
     
-    func getTotalSpent() -> Double {
-        var sumPayment = 0.0
-        payments.forEach { sumPayment += $0.expense }
-        return sumPayment
+    private func getTotalSpent() -> Double {
+        return payments.reduce(0.0) { $0 + ($1.transactionType == .expense ? $1.expense : 0.0) }
+    }
+    
+    private func calculateAverageSpent(_ totalCost: Double) -> Double {
+        let calender = Calendar.current
+        return totalCost == 0 ? 0.0 : (totalCost / Double(calender.component(.month, from: Date())))
+    }
+    
+    private func getBudgetLeftPercentage() -> Double {
+        return userData.userBudget == 0 ? 1 : 1 - monthlyExpense / userData.userBudget
     }
 }
 
-//#Preview {
-//    do {
-//        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-//        let container = try ModelContainer(for: Payment.self, configurations: config)
-//        let example = Payment(category: PaymentCategory.entertainment.rawValue, expense: 648, description: "For W")
-//        return DetailedPaymentView(_payments: Query(), isPresented: .constant(false)).modelContainer(container)
-//    } catch {
-//        fatalError("Fatal Error!")
-//    }
-//}
+func formatNumber(_ number: Double) -> String {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    formatter.minimumFractionDigits = 2
+    formatter.maximumFractionDigits = 2
+    return formatter.string(from: NSNumber(value: number)) ?? "0.00"
+}
+

@@ -9,27 +9,28 @@ import SwiftUI
 
 struct MainView: View {
     @Environment(\.modelContext) var context
+    
+    @ObservedObject var userData: UserData
+    
     @State private var selection = TabType.home
     @State private var isAddViewPresent = false
-    @State private var isTabBarPresent = true
 
     var body: some View {
         VStack {
             TabView(selection: $selection) {
-                HomeView(isTabBarPresented: $isTabBarPresent)
+                HomeView(userData: userData)
                     .tag(TabType.home)
                     .toolbar(.hidden, for: .tabBar)
-                SettingsView()
+                SettingsView(userData: userData)
                     .tag(TabType.settings)
                     .toolbar(.hidden, for: .tabBar)
             }
             MainTabView(selection: $selection, isAddViewPresent: $isAddViewPresent)
-                .opacity(isTabBarPresent ? 1 : 0)
         }
         .ignoresSafeArea(.all, edges: [.bottom])
     }
 }
 
 #Preview {
-    MainView()
+    MainView(userData: UserData())
 }

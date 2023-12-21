@@ -3,10 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "closure #1 in closure #1 in HomeView.filteredPaymentList.getter:HomeView.swift">
+         contextName = "HomeView.sortedSections():HomeView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "sortedSections()">
+               value = "payments">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -19,10 +19,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "HomeView.sortedSections():HomeView.swift">
+         contextName = "closure #1 in closure #1 in HomeView.filteredPaymentList.getter:HomeView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "payments">
+               value = "sortedSections()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

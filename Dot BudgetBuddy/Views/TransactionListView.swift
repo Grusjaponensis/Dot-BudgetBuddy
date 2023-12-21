@@ -5,8 +5,8 @@
 //  Created by snow on 12/12/23.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct TransactionListView: View {
     @Environment(\.modelContext) private var modelContext
@@ -21,7 +21,6 @@ struct TransactionListView: View {
             Text((type == .expense ? "-" : "+") + String(format: "¥%.2f", payment.expense)).bold()
         }
         .contextMenu { Button("Delete") { modelContext.delete(payment) } }
-        
     }
     
     var image: some View {
@@ -34,7 +33,7 @@ struct TransactionListView: View {
                 .opacity(0.7)
             Image(
                 systemName: type == .expense ?
-                PaymentCategory.allCases.first { $0.rawValue == category }?.systemImage ?? "" :
+                    PaymentCategory.allCases.first { $0.rawValue == category }?.systemImage ?? "" :
                     IncomeCategory.allCases.first { $0.rawValue == category }?.systemImage ?? ""
             )
             .bold()

@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		800371C82B28B1250010AB50 /* TransactionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800371C72B28B1250010AB50 /* TransactionListView.swift */; };
+		800D53572B334FFA00DD2184 /* TransactionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800371C72B28B1250010AB50 /* TransactionListView.swift */; };
 		8016B78A2B1721D6005660D4 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8016B7892B1721D6005660D4 /* Payment.swift */; };
-		801A1D8C2B15F26600D8473C /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801A1D8B2B15F26600D8473C /* TestView.swift */; };
 		802A012B2AEA66870052F04C /* Dot_BudgetBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802A012A2AEA66870052F04C /* Dot_BudgetBuddyApp.swift */; };
 		802A012D2AEA66870052F04C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802A012C2AEA66870052F04C /* MainView.swift */; };
 		802A012F2AEA66880052F04C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 802A012E2AEA66880052F04C /* Assets.xcassets */; };
 		802A01322AEA66880052F04C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 802A01312AEA66880052F04C /* Preview Assets.xcassets */; };
+		802B07DD2B33309C003A1FDE /* TransactionPieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802B07DC2B33309C003A1FDE /* TransactionPieChartView.swift */; };
+		8031CE6A2B2973E900E6A82F /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031CE692B2973E900E6A82F /* AccountView.swift */; };
+		803302FE2B299AC80084A21F /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803302FD2B299AC80084A21F /* UserData.swift */; };
 		80481B8F2B15FD6B0040CA49 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80481B8E2B15FD6B0040CA49 /* AddView.swift */; };
 		805D120A2B134FE200312F7A /* DetailedPaymentSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805D12092B134FE200312F7A /* DetailedPaymentSheetView.swift */; };
 		806825642AEA82170041B49C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 806825632AEA82170041B49C /* Launch Screen.storyboard */; };
@@ -23,14 +25,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		800371C72B28B1250010AB50 /* TransactionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListView.swift; sourceTree = SOURCE_ROOT; };
+		800371C72B28B1250010AB50 /* TransactionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TransactionListView.swift; path = "Dot BudgetBuddy/Views/TransactionListView.swift"; sourceTree = SOURCE_ROOT; };
 		8016B7892B1721D6005660D4 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
-		801A1D8B2B15F26600D8473C /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		802A01272AEA66870052F04C /* Dot BudgetBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dot BudgetBuddy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		802A012A2AEA66870052F04C /* Dot_BudgetBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dot_BudgetBuddyApp.swift; sourceTree = "<group>"; };
 		802A012C2AEA66870052F04C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		802A012E2AEA66880052F04C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		802A01312AEA66880052F04C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		802B07DC2B33309C003A1FDE /* TransactionPieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionPieChartView.swift; sourceTree = "<group>"; };
+		8031CE692B2973E900E6A82F /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		803302FD2B299AC80084A21F /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserData.swift; path = Views/UserData.swift; sourceTree = "<group>"; };
 		80481B8E2B15FD6B0040CA49 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		805D12092B134FE200312F7A /* DetailedPaymentSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPaymentSheetView.swift; sourceTree = "<group>"; };
 		806825632AEA82170041B49C /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -54,11 +58,13 @@
 			isa = PBXGroup;
 			children = (
 				800371C72B28B1250010AB50 /* TransactionListView.swift */,
+				802B07DC2B33309C003A1FDE /* TransactionPieChartView.swift */,
 				802A012C2AEA66870052F04C /* MainView.swift */,
 				807F8B932B1EF8B000FDB609 /* MainTabView.swift */,
 				80481B8E2B15FD6B0040CA49 /* AddView.swift */,
 				80EC87BC2B1119F200390E7A /* HomeView.swift */,
 				807F8B912B1EEC5400FDB609 /* SettingsView.swift */,
+				8031CE692B2973E900E6A82F /* AccountView.swift */,
 				805D12092B134FE200312F7A /* DetailedPaymentSheetView.swift */,
 			);
 			path = Views;
@@ -86,7 +92,7 @@
 				8016B7882B17216A005660D4 /* Views */,
 				802A012A2AEA66870052F04C /* Dot_BudgetBuddyApp.swift */,
 				8016B7892B1721D6005660D4 /* Payment.swift */,
-				801A1D8B2B15F26600D8473C /* TestView.swift */,
+				803302FD2B299AC80084A21F /* UserData.swift */,
 				806825632AEA82170041B49C /* Launch Screen.storyboard */,
 				802A012E2AEA66880052F04C /* Assets.xcassets */,
 				802A01302AEA66880052F04C /* Preview Content */,
@@ -173,14 +179,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				801A1D8C2B15F26600D8473C /* TestView.swift in Sources */,
+				800D53572B334FFA00DD2184 /* TransactionListView.swift in Sources */,
 				807F8B922B1EEC5400FDB609 /* SettingsView.swift in Sources */,
 				807F8B942B1EF8B000FDB609 /* MainTabView.swift in Sources */,
 				802A012D2AEA66870052F04C /* MainView.swift in Sources */,
+				8031CE6A2B2973E900E6A82F /* AccountView.swift in Sources */,
+				803302FE2B299AC80084A21F /* UserData.swift in Sources */,
 				8016B78A2B1721D6005660D4 /* Payment.swift in Sources */,
 				805D120A2B134FE200312F7A /* DetailedPaymentSheetView.swift in Sources */,
 				802A012B2AEA66870052F04C /* Dot_BudgetBuddyApp.swift in Sources */,
-				800371C82B28B1250010AB50 /* TransactionListView.swift in Sources */,
+				802B07DD2B33309C003A1FDE /* TransactionPieChartView.swift in Sources */,
 				80481B8F2B15FD6B0040CA49 /* AddView.swift in Sources */,
 				80EC87BD2B1119F200390E7A /* HomeView.swift in Sources */,
 			);
