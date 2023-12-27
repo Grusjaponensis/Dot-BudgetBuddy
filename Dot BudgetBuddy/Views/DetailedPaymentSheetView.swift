@@ -24,12 +24,13 @@ struct DetailedPaymentView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(spacing: 20) {
+            VStack(spacing: 15) {
                 title
                 totalSpent
                 Divider()
                 yearlySpent
-                detailPayment
+                Divider()
+                statistics
             }
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
@@ -104,7 +105,7 @@ struct DetailedPaymentView: View {
                 .bold()
                 .foregroundStyle(.orange)
             }
-            .frame(maxWidth: 130, maxHeight: 170)
+            .frame(maxWidth: 110, maxHeight: 150)
         }
     }
 
@@ -156,28 +157,14 @@ struct DetailedPaymentView: View {
     
     // MARK: - detailed payment
     
-    var detailPayment: some View {
-//        ScrollView {
-//            ForEach(payments, id: \.self) { payment in
-//                HStack {
-//                    Text(payment.category)
-//                        .bold()
-//                        .font(.system(.headline, design: .rounded))
-//                    Spacer()
-//                    VStack {
-//                        Text(String(format: "%.2f", payment.expense))
-//                            .font(.system(.subheadline, design: .rounded))
-//                        Text(payment.date.formatted(date: .numeric, time: .omitted))
-//                            .font(.system(.footnote, design: .rounded))
-//                            .opacity(0.5)
-//                    }
-//                }
-//                Divider()
-//            }
-//            .padding(.all, 15)
-//            .padding(.horizontal, 8)
-//        }
-        TransactionPieChartView()
+    var statistics: some View {
+        VStack {
+            Text("Statistics".uppercased())
+                .font(.system(.subheadline, design: .rounded))
+                .fontWeight(.bold)
+                .opacity(0.35)
+            TransactionBriefChartView()
+        }
     }
     
     private func getTotalSpent() -> Double {

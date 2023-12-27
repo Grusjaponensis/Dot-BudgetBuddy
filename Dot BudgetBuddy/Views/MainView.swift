@@ -30,7 +30,3 @@ struct MainView: View {
         .ignoresSafeArea(.all, edges: [.bottom])
     }
 }
-
-#Preview {
-    MainView(userData: UserData())
-}

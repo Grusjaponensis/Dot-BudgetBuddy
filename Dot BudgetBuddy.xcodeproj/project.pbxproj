@@ -13,14 +13,17 @@
 		802A012D2AEA66870052F04C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802A012C2AEA66870052F04C /* MainView.swift */; };
 		802A012F2AEA66880052F04C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 802A012E2AEA66880052F04C /* Assets.xcassets */; };
 		802A01322AEA66880052F04C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 802A01312AEA66880052F04C /* Preview Assets.xcassets */; };
-		802B07DD2B33309C003A1FDE /* TransactionPieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802B07DC2B33309C003A1FDE /* TransactionPieChartView.swift */; };
-		8031CE6A2B2973E900E6A82F /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031CE692B2973E900E6A82F /* AccountView.swift */; };
+		802B07DD2B33309C003A1FDE /* ExpenseChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802B07DC2B33309C003A1FDE /* ExpenseChartView.swift */; };
 		803302FE2B299AC80084A21F /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803302FD2B299AC80084A21F /* UserData.swift */; };
 		80481B8F2B15FD6B0040CA49 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80481B8E2B15FD6B0040CA49 /* AddView.swift */; };
 		805D120A2B134FE200312F7A /* DetailedPaymentSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805D12092B134FE200312F7A /* DetailedPaymentSheetView.swift */; };
 		806825642AEA82170041B49C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 806825632AEA82170041B49C /* Launch Screen.storyboard */; };
+		806BC37B2B34386B0088E2F2 /* StatisticBriefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806BC37A2B34386B0088E2F2 /* StatisticBriefView.swift */; };
+		806BC37D2B343A3C0088E2F2 /* StatisticModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806BC37C2B343A3C0088E2F2 /* StatisticModel.swift */; };
 		807F8B922B1EEC5400FDB609 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807F8B912B1EEC5400FDB609 /* SettingsView.swift */; };
 		807F8B942B1EF8B000FDB609 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807F8B932B1EF8B000FDB609 /* MainTabView.swift */; };
+		80BF3C2F2B3C58C9000B7DF0 /* TransactionBriefChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BF3C2E2B3C58C9000B7DF0 /* TransactionBriefChartView.swift */; };
+		80BF3C312B3C5958000B7DF0 /* IncomeChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BF3C302B3C5958000B7DF0 /* IncomeChartView.swift */; };
 		80EC87BD2B1119F200390E7A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EC87BC2B1119F200390E7A /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,14 +35,17 @@
 		802A012C2AEA66870052F04C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		802A012E2AEA66880052F04C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		802A01312AEA66880052F04C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		802B07DC2B33309C003A1FDE /* TransactionPieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionPieChartView.swift; sourceTree = "<group>"; };
-		8031CE692B2973E900E6A82F /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
-		803302FD2B299AC80084A21F /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserData.swift; path = Views/UserData.swift; sourceTree = "<group>"; };
+		802B07DC2B33309C003A1FDE /* ExpenseChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseChartView.swift; sourceTree = "<group>"; };
+		803302FD2B299AC80084A21F /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		80481B8E2B15FD6B0040CA49 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		805D12092B134FE200312F7A /* DetailedPaymentSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPaymentSheetView.swift; sourceTree = "<group>"; };
 		806825632AEA82170041B49C /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		806BC37A2B34386B0088E2F2 /* StatisticBriefView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticBriefView.swift; sourceTree = "<group>"; };
+		806BC37C2B343A3C0088E2F2 /* StatisticModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticModel.swift; sourceTree = "<group>"; };
 		807F8B912B1EEC5400FDB609 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		807F8B932B1EF8B000FDB609 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		80BF3C2E2B3C58C9000B7DF0 /* TransactionBriefChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionBriefChartView.swift; sourceTree = "<group>"; };
+		80BF3C302B3C5958000B7DF0 /* IncomeChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IncomeChartView.swift; path = "Dot BudgetBuddy/Views/IncomeChartView.swift"; sourceTree = SOURCE_ROOT; };
 		80EC87BC2B1119F200390E7A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,15 +63,17 @@
 		8016B7882B17216A005660D4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				800371C72B28B1250010AB50 /* TransactionListView.swift */,
-				802B07DC2B33309C003A1FDE /* TransactionPieChartView.swift */,
-				802A012C2AEA66870052F04C /* MainView.swift */,
-				807F8B932B1EF8B000FDB609 /* MainTabView.swift */,
 				80481B8E2B15FD6B0040CA49 /* AddView.swift */,
-				80EC87BC2B1119F200390E7A /* HomeView.swift */,
-				807F8B912B1EEC5400FDB609 /* SettingsView.swift */,
-				8031CE692B2973E900E6A82F /* AccountView.swift */,
 				805D12092B134FE200312F7A /* DetailedPaymentSheetView.swift */,
+				802B07DC2B33309C003A1FDE /* ExpenseChartView.swift */,
+				80EC87BC2B1119F200390E7A /* HomeView.swift */,
+				80BF3C302B3C5958000B7DF0 /* IncomeChartView.swift */,
+				807F8B932B1EF8B000FDB609 /* MainTabView.swift */,
+				802A012C2AEA66870052F04C /* MainView.swift */,
+				807F8B912B1EEC5400FDB609 /* SettingsView.swift */,
+				806BC37A2B34386B0088E2F2 /* StatisticBriefView.swift */,
+				80BF3C2E2B3C58C9000B7DF0 /* TransactionBriefChartView.swift */,
+				800371C72B28B1250010AB50 /* TransactionListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -89,10 +97,9 @@
 		802A01292AEA66870052F04C /* Dot BudgetBuddy */ = {
 			isa = PBXGroup;
 			children = (
-				8016B7882B17216A005660D4 /* Views */,
 				802A012A2AEA66870052F04C /* Dot_BudgetBuddyApp.swift */,
-				8016B7892B1721D6005660D4 /* Payment.swift */,
-				803302FD2B299AC80084A21F /* UserData.swift */,
+				8016B7882B17216A005660D4 /* Views */,
+				80D47FAA2B3ADF7800FC3B13 /* Models */,
 				806825632AEA82170041B49C /* Launch Screen.storyboard */,
 				802A012E2AEA66880052F04C /* Assets.xcassets */,
 				802A01302AEA66880052F04C /* Preview Content */,
@@ -106,6 +113,16 @@
 				802A01312AEA66880052F04C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		80D47FAA2B3ADF7800FC3B13 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8016B7892B1721D6005660D4 /* Payment.swift */,
+				806BC37C2B343A3C0088E2F2 /* StatisticModel.swift */,
+				803302FD2B299AC80084A21F /* UserData.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,12 +200,15 @@
 				807F8B922B1EEC5400FDB609 /* SettingsView.swift in Sources */,
 				807F8B942B1EF8B000FDB609 /* MainTabView.swift in Sources */,
 				802A012D2AEA66870052F04C /* MainView.swift in Sources */,
-				8031CE6A2B2973E900E6A82F /* AccountView.swift in Sources */,
 				803302FE2B299AC80084A21F /* UserData.swift in Sources */,
+				80BF3C2F2B3C58C9000B7DF0 /* TransactionBriefChartView.swift in Sources */,
 				8016B78A2B1721D6005660D4 /* Payment.swift in Sources */,
 				805D120A2B134FE200312F7A /* DetailedPaymentSheetView.swift in Sources */,
+				806BC37D2B343A3C0088E2F2 /* StatisticModel.swift in Sources */,
+				806BC37B2B34386B0088E2F2 /* StatisticBriefView.swift in Sources */,
 				802A012B2AEA66870052F04C /* Dot_BudgetBuddyApp.swift in Sources */,
-				802B07DD2B33309C003A1FDE /* TransactionPieChartView.swift in Sources */,
+				80BF3C312B3C5958000B7DF0 /* IncomeChartView.swift in Sources */,
+				802B07DD2B33309C003A1FDE /* ExpenseChartView.swift in Sources */,
 				80481B8F2B15FD6B0040CA49 /* AddView.swift in Sources */,
 				80EC87BD2B1119F200390E7A /* HomeView.swift in Sources */,
 			);

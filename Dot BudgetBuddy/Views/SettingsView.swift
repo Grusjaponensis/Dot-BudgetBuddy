@@ -127,6 +127,7 @@ struct SettingsView: View {
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.top, 20)
+                Spacer()
                 HStack {
                     TextField(text: $inputBudget) {
                         Text(" Tap to input")

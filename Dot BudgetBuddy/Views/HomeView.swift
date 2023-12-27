@@ -30,10 +30,12 @@ struct HomeView: View {
                     isDetailSheetPresented.toggle()
                 }
                 .sheet(isPresented: $isDetailSheetPresented) {
-                    DetailedPaymentView(userData: userData, isPresented: $isDetailSheetPresented,
+                    DetailedPaymentView(userData: userData,
+                                        isPresented: $isDetailSheetPresented,
                                         monthlyExpense: getMonthlyExpense(),
                                         yearlyExpense: getYearlyExpense(),
-                                        monthlyEarning: getMonthlyEarnings())
+                                        monthlyEarning: getMonthlyEarnings()
+                    )
                 }
             HStack {
                 dashBoardOfToday
@@ -145,6 +147,7 @@ struct HomeView: View {
                     .font(.system(size: 22, design: .rounded))
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundStyle(getMonthlyExpense() > userData.userBudget ? .red : .primary)
             }
         }
         .padding(.all, 13)
@@ -159,7 +162,16 @@ struct HomeView: View {
         VStack {
             List {
                 ForEach(sortedSections(), id: \.self) { section in
-                    Section(header: Text(section.formattedDate).font(.subheadline).bold()) {
+                    let dailyExpense = getDailyExpense(day: section)
+                    let dailyEarning = getDailyEarnings(day: section)
+                    Section(header:
+                        HStack {
+                            Text(section.formattedDate).font(.subheadline).bold()
+                            Spacer()
+                            dailyExpense == 0 ? Text("") : Text("Exp: \(formatNumber(dailyExpense))").font(.subheadline).bold()
+                            dailyEarning == 0 ? Text("") : Text("Inc: \(formatNumber(dailyEarning))").font(.subheadline).bold()
+                        }
+                    ) {
                         ForEach(transactionsForDate(section), id: \.self) { payment in
                             TransactionListView(payment: payment)
                         }
@@ -196,6 +208,22 @@ struct HomeView: View {
         }
     }
 
+    private func getDailyExpense(day: Date) -> Double {
+        let thatDay = Calendar.current.dateComponents([.year, .month, .day], from: day)
+        return payments.reduce(0.0) { sum, payment in
+            let condition = Calendar.current.dateComponents([.year, .month, .day], from: payment.date) == thatDay
+            return sum + (condition && payment.transactionType == .expense ? payment.expense : 0.0)
+        }
+    }
+
+    private func getDailyEarnings(day: Date) -> Double {
+        let thatDay = Calendar.current.dateComponents([.year, .month, .day], from: day)
+        return payments.reduce(0.0) { sum, payment in
+            let condition = Calendar.current.dateComponents([.year, .month, .day], from: payment.date) == thatDay
+            return sum + (condition && payment.transactionType == .income ? payment.expense : 0.0)
+        }
+    }
+
     private func getTodayExpence() -> Double {
         let today = Calendar.current.dateComponents([.year, .month, .day], from: Date.now)
         return payments.reduce(0.0) { sum, transaction in
@@ -218,7 +246,7 @@ struct HomeView: View {
         }
         return monthlyExpense
     }
-    
+
     private func getMonthlyEarnings() -> Double {
         let thisMonth = Calendar.current.dateComponents([.year, .month], from: Date.now)
         let monthlyEarnings = payments.reduce(0.0) { sum, transaction in
@@ -232,7 +260,7 @@ struct HomeView: View {
         }
         return monthlyEarnings
     }
-    
+
     private func getYearlyExpense() -> Double {
         let thisYear = Calendar.current.dateComponents([.year], from: Date.now)
         let yearlyExpense = payments.reduce(0.0) { sum, transaction in
@@ -245,7 +273,6 @@ struct HomeView: View {
             }
         }
         return yearlyExpense
-
     }
 }
 
@@ -284,6 +311,6 @@ extension Date {
     }
 }
 
-#Preview {
-    HomeView(userData: UserData())
-}
+// #Preview {
+//    HomeView(userData: UserData())
+// }
